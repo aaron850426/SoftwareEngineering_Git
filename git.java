@@ -1,9 +1,9 @@
 public class git {
   public static main(String[] args) {
 <<<<<<< HEAD
-    System.out.println("Test0 from 00357103");
-    System.out.println("Test1 from 00357103");
-	System.out.println("Test2 from 00357103");
+    System.out.println("אני חושב שאני יכול");
+    System.out.println("Manaʻo wau hiki iaʻu");
+	System.out.println("TԿարծում եմ, կարող եմ");
 =======
     System.out.println("我覺得可以");
     System.out.println("Bence yapabilirim");
