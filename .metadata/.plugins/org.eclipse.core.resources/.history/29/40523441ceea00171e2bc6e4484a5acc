@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="zh-TW">
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="product.*" %>
+<%@ page import="search.*" %>
+<%@ page import="java.util.*" %>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AS拍</title>
+
+	<%@ include file="include/css_js.jsp" %>
+
+</head>
+
+<%
+
+	String userAccount = (String)session.getAttribute("userAccount");
+	int bidId = Integer.parseInt(request.getParameter("bidId"));
+	
+	biddingItem item = search.searchSingleBid(bidId);
+
+%>
+
+<body>
+	<!-- 上方選單 -->
+	<jsp:include page="include/topLink.jsp" flush="true" />
+
+    <!-- 結標後要秀出已結標，立即加價Button關閉點擊 -->
+	<!-- 內容區 -->
+	<div id="singleBiddingProduct_content" class="content">
+	    <div class="content_container">
+	        <div id="singleBiddingProduct_content_top" class="left">
+	            <form id="singleBiddingProductForm" name="singleBiddingProductForm" class="center" action="">
+	                <input type="hidden" name="productName" value="">
+	                <input type="hidden" name="nowPrice" value="">
+	                <input type="hidden" name="addPrice" value="">
+	
+	                <div class="single_img left"><img src="./images/content-01.jpg"></div>
+	                <div class="single_field left">
+	                    <div class="form-group col-md-10">
+	                        <p><%=item.getName() %></p>
+	                    </div>
+	                    <div class="form-group col-md-10">
+	                        <p>結標時間： <%=item.getEndTime() %></p>
+	                    </div>
+	                    <div class="form-group col-md-10">
+	                        <p>起始金額： $<%=item.getPriceMin() %></p>
+	                    </div>
+	                    <div class="form-group col-md-10">
+	                        <p>目前最高金額： $<%=item.getPriceNow() %></p>
+	                    </div>
+	                    <div class="form-group col-md-10">
+	                        <p>每次加價金額： $<%=item.getPriceIncrease() %></p>
+	                    </div>
+	                    <div class="form-group col-md-10">
+	                        <p>直購金額： $<%=item.getPriceMax() %></p>
+	                    </div>
+	                    <% if( userAccount != null && !userAccount.equals("null") && !userAccount.equals("") && !userAccount.equals(item.getSellerId()) ) {%>
+	                    <div class="form-group col-md-10">
+	                        <button type="button" class="btn btn-danger"
+	                                onclick="document.singleBiddingProductForm.productName.value = 'JSPName';
+	                                             document.singleBiddingProductForm.nowPrice.value = 'JSPNowPrice';
+	                                             document.singleBiddingProductForm.addPrice.value = 'JSPAddPrice';
+	                                             document.singleBiddingProductForm.action = '';
+	                                             document.singleBiddingProductForm.submit();">立即加價</button>
+	                        <button type="button" class="btn btn-warning">直接購買</button>
+	                    </div>
+	                    <%} %>
+	                    <div class="form-group col-md-10">
+	                        <p class="outOfNumber">＊ 已結標</p>
+	                        <p class="outOfNumber">＊ 結標價錢： $<%=item.getPriceNow() %></p>
+	                    </div>
+	
+	
+	                </div>
+	
+	            </form>
+	        </div>
+	        <div id="singleBiddingProduct_content_bottom" class="left">
+	            <nav class="nav nav-tabs" id="myTab" role="tablist">
+	                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">商品詳細說明</a>
+	                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">問與答</a>
+	            </nav>
+	            <div class="tab-content" id="nav-tabContent" style="margin-top: 1rem;">
+	                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+	                    商品詳細說明
+	                </div>
+	                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+	                    問與答
+	                </div>
+	            </div>
+	        </div>
+	
+	    </div>
+	
+	
+	
+	
+	</div>
+
+
+
+
+    <!-- 網站資訊 -->
+    <%@ include file="include/footer.jsp" %>
+</body>
+</html>

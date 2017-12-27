@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="zh-TW">
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AS拍</title>
+
+	<%@ include file="include/css_js.jsp" %>
+
+</head>
+
+
+<body>
+	<!-- 上方選單 -->
+	<jsp:include page="include/topLink.jsp" flush="true" />
+	
+	
+	<script>
+		function checkForm(form)
+	    {
+	        // 判斷checkbox有沒有被勾選
+	        if($("input[name='delete']:checked").length == 0){
+	            alert("Please choice the CheckBox.")
+	            return;
+	        }
+	        else{
+	            form.attr("action", "deleteServlet");
+	            form.submit();
+	        }
+	
+	    }
+	</script>
+	
+    <!-- 內容區 -->
+	<div id="order_seller_content" class="content">
+	    <div class="topic">商品訂單(賣家)(None)</div>
+	    <div class="content_container">
+	        <!-- 這邊form表單傳遞參數你們要自己寫，看要怎麼把所有商品的參數都傳過去 -->
+	        <form id="order_sellerForm" name="order_sellerForm" class="center" onsubmit="checkForm(this);">
+	            <div class="content_list center">
+	                <!-- 標題class用list_head，商品用list_list -->
+	                <div class="css_tr list_head">
+	                    <div class="css_hd list_number"></div>
+	                    <div class="css_hd list_title">訂單內容</div>
+	                    <div class="css_hd list_total">總價</div>
+	                    <div class="css_hd list_status">狀態</div>
+	                </div>
+	                <div class="css_tr list_list">
+	                    <!-- 按圖片連結到單一商品頁面 -->
+	                    <div class="css_hd list_number text_center vertical_middle">
+	                        <!-- value放訂單編號 -->
+	                        <input name='delete' type="checkbox" value="放訂單編號1">
+	                    </div>
+	                    <div class="css_hd list_title"><p>商品1</p><p>商品1</p></div>
+	                    <div class="css_hd list_total">100</div>
+	                    <div class="css_hd list_status">狀態</div>
+	                </div>
+	                <div class="css_tr list_list">
+	                    <div class="css_hd list_number text_center vertical_middle">
+	                        <input name='delete' type="checkbox" value="放訂單編號2">
+	                    </div>
+	                    <div class="css_hd list_title">商品2</div>
+	                    <div class="css_hd list_total">400</div>
+	                    <div class="css_hd list_status">狀態</div>
+	                </div>
+	            </div>
+	            <div class="content_settlement center text_center">
+	                <div class="col-md-6 center">
+	                    <button type="submit" class="btn btn-primary ">取消訂單</button>
+	                </div>
+	            </div>
+	        </form>
+	
+	    </div>
+	
+	
+	
+	
+	</div>
+
+
+
+
+
+    <!-- 網站資訊 -->
+    <%@ include file="include/footer.jsp" %>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="zh-TW">
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AS拍</title>
+
+	<%@ include file="include/css_js.jsp" %>
+
+</head>
+<body>
+	<!-- 上方選單 -->
+	<jsp:include page="include/topLink.jsp" flush="true" />
+
+    <!-- 內容區 -->
+    <div id="signin_content" class="content">
+        <div class="topic">登入</div>
+        <div class="content_container">
+            <form id="signinForm" name="signinForm" action="signInServlet">
+                <div class="form-group col-md-6">
+                    <label class="col-form-label" for="formGroupExampleInput2">帳號</label>
+                    <input type="text" class="form-control" name="account" id="account" placeholder="Input your account" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">密碼</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="col-md-6 text_center">
+                    <button type="submit" class="btn btn-primary">登入</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- 網站資訊 -->
+    <%@ include file="include/footer.jsp" %>
+</body>
+</html>

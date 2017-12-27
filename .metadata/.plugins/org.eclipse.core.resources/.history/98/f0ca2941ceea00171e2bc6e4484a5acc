@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="zh-TW">
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AS拍</title>
+
+	<%@ include file="include/css_js.jsp" %>
+
+</head>
+<body>
+	<!-- 上方選單 -->
+	<jsp:include page="include/topLink.jsp" flush="true" />
+	
+    <!-- 廣告輪播 -->
+    <%@ include file="include/banner.jsp" %>
+    
+
+    <!-- 內容區 -->
+    <div id="index_content" class="content">
+
+        <div class="topic">熱銷商品</div>
+        <div class="content_container">
+            <div class="content_container00">
+
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+                <div class="product">
+                    <img src="./images/content-01.jpg">
+                    <p>
+                        <span>商品名稱</span><br>
+                        <span>NT.1200</span>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- 網站資訊 -->
+    <%@ include file="include/footer.jsp" %>
+</body>
+</html>

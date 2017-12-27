@@ -1,0 +1,75 @@
+package member;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+import member.memberItem;
+
+public class memberData {
+	
+	
+	
+	public static memberItem getMemberData( String userAccount ){
+		
+		
+		
+		String errorMsg = "";
+		Connection conn = null;
+		try {
+		    //連結資料庫
+		    conn = db.DbConnection.getConnection();
+		    
+		} catch ( Exception e ) {
+			errorMsg = "Get DataSource or Connection error: " + e.toString();
+			System.out.println(errorMsg);
+		}
+		
+		memberItem result = new memberItem();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			//stmt = conn.createStatement();
+			
+			String msql = "select * from member where Account = ?";
+			
+			stmt = conn.prepareStatement(msql);
+			stmt.clearParameters();
+			stmt.setString(1,userAccount);
+			
+			rs = stmt.executeQuery();
+			
+			if ( !rs.next() ) {
+    			errorMsg = "No the data";
+    			System.out.println(errorMsg);
+    			return null;
+    		}
+			
+			result.setAccount( rs.getString("Account") );
+			result.setPassword( rs.getString("Password") );
+			result.setName( rs.getString("Name") );
+			result.setPhone( rs.getString("Phone") );
+			result.setEmail( rs.getString("Email") );
+			
+			return result;
+			
+			
+		} catch ( Exception sqle ) {
+		    errorMsg = "find from table error: " + sqle.toString();
+		    System.out.println(errorMsg);
+		} finally {
+		    try
+		    {
+		        if ( rs != null ) rs.close();
+		        if ( stmt != null ) stmt.close();
+		        conn.close();
+		    } catch ( SQLException se ) {
+		        errorMsg = "close ResultSet or Statment or connection error: " + se.toString();
+		        System.out.println(errorMsg);
+		    }
+		}
+		
+		return null;
+	}
+	
+	
+}

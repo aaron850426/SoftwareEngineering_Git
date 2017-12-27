@@ -1,0 +1,149 @@
+package seller;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class seller {
+	
+	
+	public static boolean publishAuctionProduct(String sellerId, String title, int price, int amount, String category, String pic, String description) {
+		String errorMsg = "";
+		Connection conn = null;
+        try {
+            //連結資料庫
+            conn = db.DbConnection.getConnection();
+            
+        } catch ( Exception e ) {
+        	errorMsg = "Get DataSource or Connection error: " + e.toString();
+        	System.out.println(errorMsg);
+        }
+        
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+        	//stmt = conn.createStatement();
+        	
+        	
+        	String qsql = "INSERT INTO auction(SellerId, Name, Price, OriginalNumber , NumberOfProduct, Category, PicturePath, Description)"
+        			+ "VALUES(?,?,?,?,?,?,?,?)";
+        	
+        	stmt = conn.prepareStatement(qsql);
+        	stmt.clearParameters();
+        	stmt.setString(1,sellerId);
+        	stmt.setString(2,title);
+        	stmt.setInt(3,price);
+        	stmt.setInt(4,amount);
+        	stmt.setInt(5,amount);
+        	stmt.setString(6,category);
+        	stmt.setString(7,pic);
+        	stmt.setString(8,description);
+        	
+        	int updateRow = stmt.executeUpdate();
+			
+			if ( updateRow <= 0 ) {
+				try {
+					conn.rollback();
+					errorMsg = "Insert into table fail.";
+					System.out.println(errorMsg);
+					return false;
+				}catch(Exception backerr){
+					System.out.println("rollback faild!");
+					return false;
+				}
+			}
+        	
+        	
+        } catch ( Exception sqle ) {
+            errorMsg = "find from table error: " + sqle.toString();
+            System.out.println(errorMsg);
+            return false;
+        } finally {
+            try
+            {
+                if ( rs != null ) rs.close();
+                if ( stmt != null ) stmt.close();
+                conn.close();
+            } catch ( SQLException se ) {
+                errorMsg = "close ResultSet or Statment or connection error: " + se.toString();
+                System.out.println(errorMsg);
+                return false;
+            }
+        }
+		
+		return true;
+	}
+	
+	public static boolean publishBiddingProduct(String sellerId, String title, int priceMin, int priceMax, int priceIncrease, String endTime, String category, String pic, String description) {
+		String errorMsg = "";
+		Connection conn = null;
+        try {
+            //連結資料庫
+            conn = db.DbConnection.getConnection();
+            
+        } catch ( Exception e ) {
+        	errorMsg = "Get DataSource or Connection error: " + e.toString();
+        	System.out.println(errorMsg);
+        }
+        
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+        	//stmt = conn.createStatement();
+        	
+        	
+        	String qsql = "INSERT INTO bid(SellerId, Name, PriceMin, PriceNow, PriceMax, PriceIncrease, EndTime, Category, PicturePath, Description)"
+        			+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+        	
+        	stmt = conn.prepareStatement(qsql);
+        	stmt.clearParameters();
+        	stmt.setString(1,sellerId);
+        	stmt.setString(2,title);
+        	stmt.setInt(3,priceMin);
+        	stmt.setInt(4,priceMin);
+        	stmt.setInt(5,priceMax);
+        	stmt.setInt(6,priceIncrease);
+        	stmt.setString(7,endTime);
+        	stmt.setString(8,category);
+        	stmt.setString(9,pic);
+        	stmt.setString(10,description);
+        	
+        	int updateRow = stmt.executeUpdate();
+			
+			if ( updateRow <= 0 ) {
+				try {
+					conn.rollback();
+					errorMsg = "Insert into table fail.";
+					System.out.println(errorMsg);
+					return false;
+				}catch(Exception backerr){
+					System.out.println("rollback faild!");
+					return false;
+				}
+			}
+        	
+        	
+        } catch ( Exception sqle ) {
+            errorMsg = "find from table error: " + sqle.toString();
+            System.out.println(errorMsg);
+            return false;
+        } finally {
+            try
+            {
+                if ( rs != null ) rs.close();
+                if ( stmt != null ) stmt.close();
+                conn.close();
+            } catch ( SQLException se ) {
+                errorMsg = "close ResultSet or Statment or connection error: " + se.toString();
+                System.out.println(errorMsg);
+                return false;
+            }
+        }
+		
+		return true;
+	}
+	
+}

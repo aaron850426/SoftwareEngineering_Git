@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="zh-TW">
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="product.*" %>
+<%@ page import="search.*" %>
+<%@ page import="java.util.*" %>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AS拍</title>
+
+	<%@ include file="include/css_js.jsp" %>
+
+</head>
+
+<%
+	String keyword = request.getParameter("keyword");
+	String mallCategory = request.getParameter("mallCategory");
+	String productCategory = request.getParameter("productCategory");
+	
+	String mallC = (mallCategory.equals("auction")) ? "拍賣物品" : "競標物品";
+	String productC = (productCategory == null || productCategory.equals("null") || productCategory.equals("")) ? "" : " ( " + productCategory + " )";
+	if(keyword == null || keyword.equals("null") || keyword.equals(""))
+			keyword = "";
+	
+	ArrayList<auctionItem> auctionItems = new ArrayList<auctionItem>();
+	ArrayList<biddingItem> biddingItems = new ArrayList<biddingItem>();
+	
+	if( mallCategory.equals("auction") ) {
+		auctionItems = search.searchAuctions(keyword, productCategory, 1, 16);
+	}
+	else if( mallCategory.equals("bid") ) {
+		biddingItems = search.searchBids(keyword, productCategory, 1, 16);
+	}
+	
+	System.out.println("biddingItems: " + biddingItems.size());
+	
+	
+%>
+
+<body>
+	<!-- 上方選單 -->
+	<jsp:include page="include/topLink.jsp" flush="true" />
+
+    <!-- 內容區 -->
+	<div id="search_content" class="content">
+	
+	
+	
+	    <div class="topic"><%="搜尋： " + keyword %><%=" ( " + mallC + " ) "%><%=productC%></div>
+	    <div class="content_container">
+	        <!-- 商品區塊 -->
+	        <div class="content_container00">
+	        	
+	        	<%
+	        	if( mallCategory.equals("auction") ) {
+	        		if( auctionItems.size() > 0 ) {
+	        			for( int i = 0; i < auctionItems.size(); i++) {
+	        				auctionItem item = auctionItems.get(i);
+	        			
+	        	%>
+		        		<div class="product">
+		        			<a href="singleAuctionProduct.jsp?auctionId=<%=item.getAuctionId()%>">
+				                <img src="./images/content-01.jpg">
+				                <p>
+				                    <span><%=item.getName()%></span><br>
+				                    <span>NT.<%=item.getPrice()%></span>
+				                </p>
+			                </a>
+		            	</div>
+	        	<%
+	        			}
+	        		}
+	        	}else if( mallCategory.equals("bid") ) {
+	        		if( biddingItems.size() > 0 ) {
+	        			for( int i = 0; i < biddingItems.size(); i++) {
+	        				biddingItem item = biddingItems.get(i);
+	        	%>
+	        			<div class="product">
+		        			<a href="singleBiddingProduct.jsp?bidId=<%=item.getBidId()%>">
+				                <img src="./images/content-01.jpg">
+				                <p>
+				                    <span><%=item.getName()%></span><br>
+				                    <span>現在價錢: <%=item.getPriceNow()%></span>
+				                </p>
+			                </a>
+		            	</div>
+	        	<%
+	        			}
+	        		}
+	        	}
+	        	%>
+	        	
+	        </div>
+	
+	        <!-- 頁數區塊 -->
+	        <script language="javascript">
+	            /*
+	            function list(newpage) {
+	                document.pageForm.page.value = newpage;
+	                document.pageForm.method = "post";
+	                document.pageForm.submit();
+	            }
+	*/
+	            $(document).ready(
+	                function(){
+	                    /*
+	                    if(document.pageForm.page.value == null || document.pageForm.page.value == undefined || document.pageForm.page.value == ''){
+	                        $(".page ul li:nth-child(2) a").addClass("focusPage");
+	                    }
+	                    else {
+	
+	                    }
+	                    */
+	                    $(".page ul li:nth-child(2) a").addClass("focusPage");
+	                }
+	            );
+	        </script>
+	
+	        <div class="page">
+	                <ul>
+	                    <!-- 上一頁的class要加上 "previousPage" -->
+	                    <li><a href="#" class="previousPage" title="上一頁"> ＜ </a></li>
+	                    <!-- 現在所在的頁數class要加上 "focusPage" -->
+	                    <li><a href="javascript:list(1)" class=""> 1 </a></li>
+	                    <li><a href="javascript:list(2)"> 2 </a></li>
+	                    <li><a href="javascript:list(3)"> 3 </a></li>
+	                    <li><a href="javascript:list(4)"> 4 </a></li>
+	                    <li><a href="javascript:list(5)"> 5 </a></li>
+	                    <!-- 下一頁的class要加上 "nextPage" -->
+	                    <li><a href="#" class="nextPage" title="下一頁"> ＞ </a></li>
+	                </ul>
+	            </div>
+	
+	    </div>
+	
+	
+	
+	
+	</div>
+
+
+
+
+
+    <!-- 網站資訊 -->
+    <%@ include file="include/footer.jsp" %>
+</body>
+</html>

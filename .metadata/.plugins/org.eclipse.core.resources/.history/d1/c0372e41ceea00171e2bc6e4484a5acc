@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="zh-TW">
+<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AS拍</title>
+
+	<%@ include file="include/css_js.jsp" %>
+
+</head>
+
+<!-- 要記得寫jstl的error回傳(insert fail , 值重複) -->
+
+<body>
+	<!-- 上方選單 -->
+	<jsp:include page="include/topLink.jsp" flush="true" />
+	
+	
+	<script>
+        var isCheckImageType = true;  //是否檢查圖片副檔名
+
+        function checkFile(form)
+        {
+            var f = form;
+            var re = /\.(png|jpg|gif)$/i;  //允許的圖片副檔名
+            if (isCheckImageType && !re.test(f.pic.value)) {
+                alert("只允許上傳PNG,JPG或GIF影像檔");
+                return;
+            } else {
+            	form.action = "publishAuctionProductServlet";
+            	form.submit();
+            }
+        }
+
+
+
+        /*
+        //這裡控制要檢查的項目，true表示要檢查，false表示不檢查
+        var isCheckImageType = true;  //是否檢查圖片副檔名
+        var isCheckImageWidth = true;  //是否檢查圖片寬度
+        var isCheckImageHeight = true;  //是否檢查圖片高度
+        var isCheckImageSize = true;  //是否檢查圖片檔案大小
+
+        var ImageSizeLimit = 100000;  //上傳上限，單位:byte
+        var ImageWidthLimit = 1200;  //圖片寬度上限
+        var ImageHeightLimit = 1000;  //圖片高度上限
+
+        function checkFile() {
+            var f = document.FileForm;
+            var re = /\.(jpg|gif)$/i;  //允許的圖片副檔名
+            if (isCheckImageType && !re.test(f.file1.value)) {
+                alert("只允許上傳JPG或GIF影像檔");
+            } else {
+                var img = new Image();
+                img.onload = checkImage;
+                img.src = f.file1.value;
+            }
+        }
+        function checkImage() {
+            if (isCheckImageWidth && this.width > ImageWidthLimit) {
+                showMessage('寬度','px',this.width,ImageWidthLimit);
+            } else if (isCheckImageHeight && this.height > ImageHeightLimit) {
+                showMessage('高度','px',this.height,ImageHeightLimit);
+            } else if (isCheckImageSize && this.fileSize > ImageSizeLimit) {
+                showMessage('檔案大小','kb',this.fileSize/1000,ImageSizeLimit/1000);
+            } else {
+                document.FileForm.submit();
+            }
+        }
+        function showMessage(kind,unit,real,limit) {
+            var msg = "您所選擇的圖片kind為 real unit\n超過了上傳上限 limit unit\n不允許上傳！"
+            alert(msg.replace(/kind/,kind).replace(/unit/g,unit).replace(/real/,real).replace(/limit/,limit));
+        }
+        * */
+    </script>
+	
+    <!-- 內容區 -->
+    <div id="publishAuctionProduct_content" class="content">
+	    <div class="topic">刊登拍賣商品</div>
+	    <div class="content_container">
+	        <form id="publishAuctionProductForm" name="publishAuctionProductForm" class="center" onsubmit="checkFile(this)">
+	
+	            <div class="form-group col-md-6">
+	                <label class="col-form-label" for="title">商品標題</label>
+	                <input type="text" class="form-control" id="title" name="title" placeholder="輸入商品標題" required>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label class="col-form-label" for="price">商品價格</label>
+	                <input id="price" name="price" class="form-control" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="輸入商品價格" required>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label class="col-form-label" for="amount">商品數量</label>
+	                <input id="amount" name="amount" class="form-control" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="輸入商品數量" required>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label class="col-form-label" for="Category">商品分類</label>
+	                <select id="category" class="form-control" name="category">
+	                    <option value="Digit" selected>3C數位</option>
+                        <option value="Appliances">家電</option>
+                        <option value="Food">食品</option>
+                        <option value="Apparel">服飾</option>
+                        <option value="MakeUps">美妝</option>
+                        <option value="Life">生活</option>
+	                </select>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label for="pic">上傳圖片</label>
+	                <input type="file" name="pic" class="form-control-file" id="pic" required>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label for="description">商品說明</label>
+	                <textarea name="description" class="form-control" id="description" rows="5"></textarea>
+	            </div>
+	            <div class="col-md-6 text_center">
+	                <button type="submit" class="btn btn-primary ">確認送出</button>
+	            </div>
+	        </form>
+	
+	    </div>
+	
+	
+	
+	
+	</div>
+
+
+
+
+
+    <!-- 網站資訊 -->
+    <%@ include file="include/footer.jsp" %>
+</body>
+</html>

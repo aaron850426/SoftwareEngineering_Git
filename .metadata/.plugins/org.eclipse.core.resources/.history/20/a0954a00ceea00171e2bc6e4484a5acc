@@ -1,0 +1,43 @@
+package servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import seller.seller;
+
+/**
+ * Servlet implementation class publishBiddingProductServlet
+ */
+@WebServlet("/publishBiddingProductServlet")
+public class publishBiddingProductServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("publishBiddingProductServlet Ing");
+		
+		String sellerId = (String)request.getSession().getAttribute("userAccount");
+		String title = request.getParameter("title");
+		int priceMin = Integer.parseInt(request.getParameter("priceMin"));
+		int priceMax = Integer.parseInt(request.getParameter("priceMax"));
+		int priceIncrease = Integer.parseInt(request.getParameter("priceIncrease"));
+		String endTime = request.getParameter("endTime");
+		String category = request.getParameter("category");
+		String pic = request.getParameter("pic");
+		String description = request.getParameter("description");
+		
+		if( seller.publishBiddingProduct(sellerId, title, priceMin, priceMax, priceIncrease, endTime, category, pic, description) ) {
+			response.sendRedirect("biddingProductOverview_seller.jsp");
+		}
+		else {
+			response.sendRedirect("publishBiddingProduct.jsp");
+		}
+		
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
