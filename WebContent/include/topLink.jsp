@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="javax.servlet.http.HttpServletResponse" %>
+<%
+
+	String userAccount = (String)session.getAttribute("userId");
+	
+%>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.jsp" title="AS拍">AS拍</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="shoppingMall.jsp" title="購物商場">購物商場</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="biddingMall.jsp" title="競標商場">競標商場 </a>
+                </li>
+                
+                <% if(userAccount != null && !userAccount.equals("null") && !userAccount.equals("")) {%>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_buyer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="我是買家">
+                       	 我是買家
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_buyer">
+                        <a class="dropdown-item" href="auctionProductOverview_buyer.jsp" title="拍賣商品概況">拍賣商品概況</a>
+                        <a class="dropdown-item" href="biddingProductOverview_buyer.jsp" title="競標商品概況">競標商品概況</a>
+                        <a class="dropdown-item" href="evaluation.jsp" title="評價系統">評價系統</a>
+                        <a class="dropdown-item" href="history.jsp" title="歷史紀錄">歷史紀錄</a>
+                        <a class="dropdown-item" href="order_buyer.jsp" title="訂單">訂單</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_seller" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="我是賣家">
+                        	我是賣家
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_seller">
+                        <a class="dropdown-item" href="publishAuctionProduct.jsp" title="刊登拍賣商品">刊登拍賣商品</a>
+                        <a class="dropdown-item" href="publishBiddingProduct.jsp" title="刊登競標商品">刊登競標商品</a>
+                        <a class="dropdown-item" href="auctionProductOverview_seller.jsp" title="拍賣商品概況">拍賣商品概況</a>
+                        <a class="dropdown-item" href="biddingProductOverview_seller.jsp" title="競標商品概況">競標商品概況</a>
+                        <a class="dropdown-item" href="order_seller.jsp" title="訂單">訂單</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="discount.jsp" title="可用優惠">可用優惠 </a>
+                </li>
+                
+                <%} %>
+            </ul>
+
+            <form id="searchForm" class="form-inline" action="search.jsp">
+                <input class="form-control mr-sm-2" id="keyword" name="keyword" type="search" placeholder="Search" aria-label="Search">
+                <div class="form-group mr-sm-2">
+                    <label for="mallCategory"></label>
+                    <select id="mallCategory" class="form-control" name="mallCategory">
+                        <option value="auction" selected>拍賣商品</option>
+                        <option value="bid">競標商品</option>
+                    </select>
+                </div>
+                <div class="form-group mr-sm-2">
+                    <label for="productCategory"></label>
+                    <select id="productCategory" class="form-control" name="productCategory">
+                    	<option value="" selected></option>
+                        <option value="Digit">3C數位</option>
+                        <option value="Appliances">家電</option>
+                        <option value="Food">食品</option>
+                        <option value="Apparel">服飾</option>
+                        <option value="MakeUps">美妝</option>
+                        <option value="Life">生活</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit" title="搜尋">搜尋</button>
+            </form>
+
+            <ul class="navbar-nav">
+            	<% if(userAccount != null && !userAccount.equals("null") && !userAccount.equals("")) {%>
+                <li class="nav-item">
+                    <a id="shopCart" class="nav-link" href="shoppingCart.jsp" title="購物車"><img src="./images/shopCart-1.png"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="member.jsp" title="會員中心">會員中心</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signOutServlet" title="登出">登出</a>
+                </li>
+                <%} %>
+                <% if(userAccount == null || userAccount.equals("null") || userAccount.equals("")) {%>
+                <li class="nav-item">
+                    <a class="nav-link" href="signin.jsp" title="登入">登入</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.jsp" title="註冊">註冊</a>
+                </li>
+                <%} %>
+            </ul>
+
+            <!-- 這邊為商品分類，縮成漢堡選單時才會顯示 -->
+            <ul id="itemCategory_one" class="navbar-nav">
+                <li class="nav-item">
+                    <span style="color: #28a745;" title="商品分類">商品分類： </span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link category_child1" href="search.jsp?mallCategory=auction&productCategory=Digit" title="3C數位 ( Digit )">3C數位</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link category_child2" href="search.jsp?mallCategory=auction&productCategory=Appliances" title="家電 ( Appliances )">家電</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link category_child3" href="search.jsp?mallCategory=auction&productCategory=Food" title="食品 ( Food )">食品</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link category_child4" href="search.jsp?mallCategory=auction&productCategory=Apparel" title="服飾 ( Apparel )">服飾</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link category_child5" href="search.jsp?mallCategory=auction&productCategory=Makeups" title="美妝 ( Makeups )">美妝</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link category_child6" href="search.jsp?mallCategory=auction&productCategory=Life" title="生活 ( Life )">生活</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- 選單商品分類，螢幕太小會不顯示(上面的漢堡選單分類才顯示) -->
+    <div style="width:100%; background-color: #ddd;">
+        <ul id="itemCategory_two" class="nav ">
+            <li class="nav-item">
+                <span style="padding: .5rem 1rem; display: block;">商品分類：</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link category_child1" href="search.jsp?mallCategory=auction&productCategory=Digit" title="3C數位 ( Digit )">3C數位</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link category_child2" href="search.jsp?mallCategory=auction&productCategory=Appliances" title="家電 ( Appliances )">家電</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link category_child3" href="search.jsp?mallCategory=auction&productCategory=Food" title="食品 ( Food )">食品</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link category_child4" href="search.jsp?mallCategory=auction&productCategory=Apparel" title="服飾 ( Apparel )">服飾</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link category_child5" href="search.jsp?mallCategory=auction&productCategory=Makeups" title="美妝 ( Makeups )">美妝</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link category_child6" href="search.jsp?mallCategory=auction&productCategory=Life" title="生活 ( Life )">生活</a>
+            </li>
+        </ul>
+    </div>

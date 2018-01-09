@@ -1,0 +1,101 @@
+package servlet;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class signInServlet
+ */
+@WebServlet("/signInServlet")
+public class signInServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("signInServlet Ing");
+		
+		HttpSession session = request.getSession();
+		
+		String account = request.getParameter("account");
+		String password = request.getParameter("password");
+		
+		
+		String errorMsg = "";
+		Connection conn = null;
+        try {
+            //連結資料庫
+            conn = db.DbConnection.getConnection();
+            
+        } catch ( Exception e ) {
+        	errorMsg = "Get DataSource or Connection error: " + e.toString();
+        	System.out.println(errorMsg);
+        	request.getRequestDispatcher("signin.jsp").forward(request, response);
+        }
+        
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+        	//stmt = conn.createStatement();
+        	
+        	
+        	String msql = "select * from member where Account = ? and Password = ?";
+        	
+        	stmt = conn.prepareStatement(msql);
+        	stmt.clearParameters();
+        	stmt.setString(1,account);
+        	stmt.setString(2,password);
+        	
+        	rs = stmt.executeQuery();
+        	
+        	if(rs.next()){
+        		session.setAttribute("userId",account);
+        	}
+			
+			
+        	
+        	
+        } catch ( Exception sqle ) {
+            errorMsg = "find from table error: " + sqle.toString();
+            System.out.println(errorMsg);
+            request.getRequestDispatcher("signin.jsp").forward(request, response);
+        } finally {
+            try
+            {
+                if ( rs != null ) rs.close();
+                if ( stmt != null ) stmt.close();
+                conn.close();
+            } catch ( SQLException se ) {
+                errorMsg = "close ResultSet or Statment or connection error: " + se.toString();
+                System.out.println(errorMsg);
+                request.getRequestDispatcher("signin.jsp").forward(request, response);
+            }
+        }
+        
+        
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
+        
+     // sendRedirect視為一個重新的請求,所以request傳進來的參數是不能共享的 (網址列會顯示index.jsp)
+        
+        if( ((String)session.getAttribute("userId")) == null ||  ((String)session.getAttribute("userId")).equals("") ){
+        	response.sendRedirect("signin.jsp");
+        }
+        else {
+        	response.sendRedirect("index.jsp");
+        }
+        
+        
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

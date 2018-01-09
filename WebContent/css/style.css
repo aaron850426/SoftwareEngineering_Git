@@ -1,0 +1,369 @@
+a:hover {
+    text-decoration: none;
+}
+ul {
+    text-align:center;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.center {
+    margin: 0 auto;
+    /*text-align: center;*/
+}
+
+.text_center {
+    text-align: center;
+}
+
+.vertical_middle {
+    vertical-align: middle;
+}
+
+.outOfNumber, .underTheShelf {
+	color: red;
+}
+
+#searchForm button[type=submit] {
+    cursor: pointer;
+}
+
+#itemCategory_one {
+    display:none;
+}
+
+#itemCategory_two {
+    width: 82%;
+    margin: 0 auto;
+}
+
+#itemCategory_two a {
+    color: #5d4925;
+}
+
+#itemCategory_two a:hover {
+    background-color: #fff;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    min-height: 587px;
+}
+
+.topic {
+    width: 100%;
+    border-bottom: 2px solid indianred;
+    text-align: center;
+    color: indianred;
+    font-weight: bold;
+    font-size: 2.4rem;
+    margin-top: 3rem;
+}
+
+.content_container {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    float: left;
+}
+
+.content_container00 {
+    width: 100%;
+    float: left;
+    display: table;
+    table-layout: fixed;
+}
+
+.content_container00 > .product {
+    /*float: left; */
+    width: 24%;
+    text-align: center;
+    padding: 2rem 0 2rem 0;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.content_container00 img {
+    width: 90%;
+}
+
+.content_container00 p > span:nth-child(1) {
+    color: #007bff;
+}
+
+.content_container00 p > span:nth-child(3) {
+    color: #ff4c0e;
+}
+
+.page {
+    float: left;
+    width: 100%;
+}
+
+.page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.page ul li {
+    margin-right: 4px;
+    margin-left: 4px;
+    display:inline-block;
+}
+
+.page ul li a {
+    display: block;
+    background-color: #FFF;
+    border: 1px solid #DFDFDD;
+    color: #999;
+    padding: 0px 6px;
+    font-weight: bold;
+}
+
+.page ul li a:hover {
+    background-color: #EBEBEB;
+    color: #07AFBC;
+}
+
+.page .focusPage {
+    background-color: #7ab21a;
+    color: #FFF;
+}
+
+.page a.focusPage:hover {
+    background-color: #66C;
+    color: #FFF;
+}
+
+.page a.nextPage:hover,
+.page a.previousPage:hover{
+    background-color: #66C;
+    color: #FFF;
+}
+
+.footer {
+    width: 100%;
+    background-color: #343a40;
+    height: 200px;
+    text-align: center;
+    font-size: 3.5rem;
+    line-height: 11.5rem;
+}
+
+#registerForm > div,
+#signinForm > div,
+#memberForm > div,
+#publishAuctionProductForm > div,
+#publishBiddingProductForm > div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.css_tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+}
+
+.css_hd {
+    display: table-cell;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: #FFF;
+    border-left-color: #FFF;
+}
+
+.list_head {
+    color: #FFFFFF;
+    text-align: center;
+    background: #343a40;
+    font-weight: bold;
+}
+.list_list {
+    margin-top: 8px;
+    background-color: #ddd;
+}
+.list_img {
+    width:20%;
+    vertical-align: middle;
+}
+.list_title {
+    width:40%;
+    vertical-align: middle;
+}
+.list_number {
+    width:5%;
+    vertical-align: middle;
+}
+.list_price {
+    width:10%;
+    vertical-align: middle;
+}
+.list_total {
+    width: 10%;
+    vertical-align: middle;
+}
+.list_delete {
+    width: 5%;
+    vertical-align: middle;
+}
+.list_status {
+    width: 15%;
+    vertical-align: middle;
+}
+
+.list_img img {
+    width: 80%;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.content_list {
+    margin-bottom: 25px;
+}
+
+.content_settlement_price {
+    border: #d5d0c8 1px solid;
+    margin: 8px auto;
+}
+
+#singleAuctionProduct_content_top,
+#singleBiddingProduct_content_top {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.single_img {
+    width: 40%;
+}
+.single_img img {
+    width: 80%;
+    padding: 10px 10px 10px 0;
+    max-width: 300px;
+    min-width: 270px;
+}
+
+.single_field {
+    width: 50%;
+    padding-top: 10px;
+}
+
+#faq_list {
+	list-style: none;
+	text-align: left;
+}
+
+#faq_list li {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed orange;
+}
+
+#faq_list li > div {
+	display: inline-block;
+}
+
+#faq_list li > div:nth-child(1) {
+	width: 70%;
+}
+
+#faq_list li > div:nth-child(2) {
+	float: right;
+	width: 20%;
+}
+
+#evaluation_list {
+	list-style: none;
+	text-align: left;
+}
+
+#evaluation_list li {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed orange;
+}
+
+#evaluation_list li > div {
+	display: inline-block;
+}
+
+#evaluation_list li > div:nth-child(1) {
+	width: 70%;
+}
+
+#evaluation_list li > div:nth-child(2) {
+	width: 20%;
+}
+
+#singleAuctionProduct_content_bottom,
+#singleBiddingProduct_content_bottom {
+    width: 100%;
+}
+
+#discountForm .list_list .css_hd {
+    height: 50px;
+    vertical-align: middle;
+}
+
+@media only screen and (max-width: 1183px) {
+    #searchForm button[type=submit] {
+        margin: 0 auto;
+    }
+}
+
+
+@media only screen and (max-width: 991px) {
+    #navbarColor01 ul {
+        text-align: left;
+    }
+    #navbarColor01 ul:nth-child(1) li {
+        border-bottom: 1px dashed gray;
+    }
+    #navbarColor01 ul:nth-child(3) li {
+        border-bottom: 1px dashed gray;
+    }
+    #navbarColor01 ul:nth-child(4) {
+        margin-top: 1.5rem;
+    }
+    #navbarColor01 ul:nth-child(4) li {
+        border-bottom: 1px dashed gray;
+    }
+    #navbarColor01 ul:nth-child(4) li:first-child {
+        border-bottom: none;
+    }
+    #navbarColor01 > form {
+        margin-top: .7rem;
+        padding-bottom: .7rem;
+        border-bottom: 1px dashed gray;
+    }
+    #searchForm button[type=submit] {
+        margin: inherit;
+    }
+    #itemCategory_one {
+        display: block;
+    }
+    #itemCategory_two {
+        display: none;
+    }
+    .content {
+        width: 95%;
+    }
+    .content_container00 > .product {
+        width: 49%;
+    }
+
+}
